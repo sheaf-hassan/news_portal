@@ -1,10 +1,9 @@
+import { Link, Route, Routes } from "react-router";
 import NewsCard from "./components/NewsCard";
-import { useGetNewsQuery } from "./store/services/newsApi";
+import Home from "./pages/Home";
+import Blog from "./pages/Blog";
 
 function App() {
-  const { data: news, error, isloading } = useGetNewsQuery();
-  console.log("from App.jsx:", news, error, isloading);
-
   return (
     <>
       <div className="container mx-auto my-10">
@@ -12,11 +11,17 @@ function App() {
           The Daily NEWS
         </h1>
 
-        <div className="grid grid-cols-3 gap-4">
-          {news?.articles?.map((item) => (
-            <NewsCard item={item} />
-          ))}
+        <div className="flex flex-row items-center justify-center gap-10 mb-10">
+          <Link to="/">Home</Link>
+          <p>News</p>
+          <Link to="/blog">Blogs</Link>
+          <p>Contact</p>
         </div>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blog" element={<Blog />} />
+        </Routes>
       </div>
     </>
   );
